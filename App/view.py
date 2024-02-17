@@ -43,7 +43,9 @@ def new_controller():
         Se crea una instancia del controlador
     """
     #TODO: Llamar la función del controlador donde se crean las estructuras de datos
-    pass
+    control = controller.newController()
+    return control
+    
 
 
 def print_menu():
@@ -65,7 +67,9 @@ def load_data(control):
     Carga los datos
     """
     #TODO: Realizar la carga de datos
-    pass
+    jobs, multilocations, skills, employments = controller.load_data(control)
+    return jobs, multilocations, skills, employments
+    
 
 
 def print_data(control, id):
@@ -155,6 +159,12 @@ if __name__ == "__main__":
         if int(inputs) == 1:
             print("Cargando información de los archivos ....\n")
             data = load_data(control)
+            t1 = lt.iterator(lt.subList(control["model"]["jobs"],1,3))
+            t2 = lt.iterator(lt.subListI(control["model"]["jobs"],-3,3))
+            print("Primero 3 datos de jobs:\n")
+            print(tabulate(t1))
+            print("Ultimos 3 datos de jobs:\n")
+            print(tabulate(t2))
         elif int(inputs) == 2:
             print_req_1(control)
 

@@ -50,28 +50,87 @@ def new_data_structs():
     manera vacía para posteriormente almacenar la información.
     """
     #TODO: Inicializar las estructuras de datos
-    pass
+    catalog = {"jobs": None,
+               "multilocations": None,
+               "skills": None,
+               "employments": None}
+    catalog["jobs"] = lt.newList("ARRAY_LIST", delimiter = ";")
+    catalog["multilocations"] = lt.newList("ARRAY_LIST", delimiter = ";")
+    catalog["skills"] = lt.newList("ARRAY_LIST", delimiter = ";")
+    catalog["employments"] = lt.newList("ARRAY_LIST", delimiter = ";")
+    
+    return catalog
 
 
 # Funciones para agregar informacion al modelo
 
-def add_data(data_structs, data):
+def addjob(catalog, data):
     """
     Función para agregar nuevos elementos a la lista
     """
     #TODO: Crear la función para agregar elementos a una lista
-    pass
+    j = newJob(data["id"], 
+                  data["published_at"], 
+                  data["title"], 
+                  data["company_name"], 
+                  data["experience_level"], 
+                  data["country_code"], 
+                  data["city"])
+    lt.addLast(catalog["jobs"],j)
+    return catalog
 
+def addskill(catalog, data):
+    s = newSkill(data["name"], data["level"], data["id"])
+    lt.addLast(catalog["skills"])
+    return catalog
+
+def addemployments(catalog, data):
+    e = newEmployments(data["type"], data["id"], data["currency_salary"], data["salary_from"], data["salary_to"])
+    lt.addLast(catalog["employments"])
+    
+    return catalog
+
+def addmultilocations(catalog, data):
+    m = newMultilocations(data["city"], data["street"], data["id"])
+    lt.addLast(catalog["multilocations"])
+    return catalog
 
 # Funciones para creacion de datos
 
-def new_data(id, info):
+def newJob(id, published_at, title, company_name, experience_level, country_code, city):
+    job = {"id":id,
+           "published_at":published_at,
+           "title":title,
+           "company_name":company_name,
+           "experience_level": experience_level,
+           "country_code": country_code,
+           "city": city
+    }
+    return job
     """
     Crea una nueva estructura para modelar los datos
     """
     #TODO: Crear la función para estructurar los datos
-    pass
+    
+def newSkill(name, level, id):
+    skill = {"name":name,
+             "level":level,
+             "id":id}
+    return skill
 
+def newEmployments(type, id, currency_salary, salary_from, salary_to):
+    employments = {"type":type,
+                   "id":id,
+                   "currency_salary":currency_salary,
+                   "salary_from":salary_from,
+                   "salary_to":salary_to}
+    return employments
+
+def newMultilocations(city, street, id):
+    multilocations = {"city": city,
+                      "street": street,
+                      "id": id}
+    return multilocations
 
 # Funciones de consulta
 
@@ -83,13 +142,14 @@ def get_data(data_structs, id):
     pass
 
 
-def data_size(data_structs):
-    """
-    Retorna el tamaño de la lista de datos
-    """
-    #TODO: Crear la función para obtener el tamaño de una lista
-    pass
-
+def jobssize(catalog):
+    return lt.size(catalog["jobs"])
+def skillssize(catalog):
+    return lt.size(catalog["skills"])
+def multilocationssize(catalog):
+    return lt.size(catalog["multilocations"])
+def employmentssize(catalog):
+    return lt.size(catalog["employments"])    
 
 def req_1(data_structs):
     """

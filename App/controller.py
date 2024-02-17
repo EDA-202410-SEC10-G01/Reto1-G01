@@ -36,17 +36,61 @@ def new_controller():
     Crea una instancia del modelo
     """
     #TODO: Llamar la función del modelo que crea las estructuras de datos
-    pass
-
+    control = {
+        "model":None
+    }
+    control["model"]=model.new_data_structs()
+    return control
 
 # Funciones para la carga de datos
 
-def load_data(control, filename):
+def load_data(control):
     """
     Carga los datos del reto
     """
     # TODO: Realizar la carga de datos
-    pass
+    catalog= control["model"]
+    jobs = loadjobs(catalog)
+    skills = loadskills(catalog)
+    multilocations = loadmultilocations(catalog)
+    employments=loademployments(catalog)
+    return jobs, skills, multilocations, employments
+
+def loadjobs(catalog):
+    jobsfile = cf.data_dir + "small-jobs.csv"
+    input_file = csv.DictReader(open(jobsfile, encoding="utf-8"), delimiter=";")
+    for job in input_file:
+        model.addjob(catalog, job)
+    return model.jobssize(catalog)
+
+def loadskills(catalog):
+    skillsfile = cf.data_dir + "small-skills.csv"
+    input_file = csv.DictReader(open(skillsfile, encoding="utf-8"), delimiter=";")
+    for skill in input_file:
+        model.addskill(catalog, skill)
+    return model.skillssize(catalog)
+
+def loadmultilocations(catalog):
+    multilocationsfile = cf.data_dir + "small-multilocations.csv"
+    input_file = csv.DictReader(open(multilocationsfile, encoding="utf-8"), delimiter=";")
+    for multilocations in input_file:
+        model.addmultilocations(catalog, multilocations)
+    return model.multilocationssize(catalog)
+
+def loademployments(catalog):
+    employmentsfile = cf.data_dir + "small-employments_types.csv"
+    input_file = csv.DictReader(open(employmentsfile, encoding="utf-8"), delimiter=";")
+    for employments in input_file:
+        model.addemployments(catalog, employments)
+    return model.employmentssize(catalog)
+
+def loadjobs(catalog):
+    jobsfile = cf.data_dir + "small-jobs.csv"
+    input_file = csv.DictReader(open(jobsfile, encoding="utf-8"), delimiter=";")
+    for job in input_file:
+        model.addjob(catalog, job)
+    return model.jobssize(catalog)
+    
 
 
 # Funciones de ordenamiento
@@ -56,7 +100,6 @@ def sort(control):
     Ordena los datos del modelo
     """
     #TODO: Llamar la función del modelo para ordenar los datos
-    pass
 
 
 # Funciones de consulta sobre el catálogo
