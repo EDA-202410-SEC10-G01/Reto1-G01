@@ -81,18 +81,18 @@ def addjob(catalog, data):
 
 def addskill(catalog, data):
     s = newSkill(data["name"], data["level"], data["id"])
-    lt.addLast(catalog["skills"])
+    lt.addLast(catalog["skills"],s)
     return catalog
 
 def addemployments(catalog, data):
     e = newEmployments(data["type"], data["id"], data["currency_salary"], data["salary_from"], data["salary_to"])
-    lt.addLast(catalog["employments"])
+    lt.addLast(catalog["employments"],e)
     
     return catalog
 
 def addmultilocations(catalog, data):
     m = newMultilocations(data["city"], data["street"], data["id"])
-    lt.addLast(catalog["multilocations"])
+    lt.addLast(catalog["multilocations"],m)
     return catalog
 
 # Funciones para creacion de datos
