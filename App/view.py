@@ -147,11 +147,12 @@ def print_req_8(control):
 # Se crea el controlador asociado a la vista
 control = new_controller()
 
+default_limit=1000
 # main del reto
 if __name__ == "__main__":
     threading.stack_size(67108864*2) # 128MB stack
     sys.setrecursionlimit(default_limit*1000000)
-    thread = threading.Thread(target=menu_cycle)
+    thread = threading.Thread(target=__name__)
     thread.start()
     """
     Menu principal
