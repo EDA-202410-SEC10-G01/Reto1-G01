@@ -27,6 +27,7 @@ from DISClib.ADT import list as lt
 from DISClib.ADT import stack as st
 from DISClib.ADT import queue as qu
 assert cf
+import threading 
 from tabulate import tabulate
 import traceback
 
@@ -148,6 +149,10 @@ control = new_controller()
 
 # main del reto
 if __name__ == "__main__":
+    threading.stack_size(67108864*2) # 128MB stack
+    sys.setrecursionlimit(default_limit*1000000)
+    thread = threading.Thread(target=menu_cycle)
+    thread.start()
     """
     Menu principal
     """
