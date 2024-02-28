@@ -174,6 +174,14 @@ def req_8(control):
     # TODO: Modificar el requerimiento 8
     pass
 
+def req_9(control):
+    """
+    Retorna el resultado del requerimiento 9
+    """
+    
+    # TODO: Modificar el requerimiento 9
+    pass
+
 
 # Funciones para medir tiempos de ejecucion
 
