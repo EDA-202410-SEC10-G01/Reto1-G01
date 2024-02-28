@@ -216,6 +216,13 @@ def req_8(data_structs):
     # TODO: Realizar el requerimiento 8
     pass
 
+def req_9(data_structs):
+    """
+    Función que soluciona el requerimiento 9
+    """
+    # TODO: Realizar el requerimiento 9
+    pass
+
 
 # Funciones utilizadas para comparar elementos dentro de una lista
 

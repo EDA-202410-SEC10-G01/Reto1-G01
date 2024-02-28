@@ -60,6 +60,7 @@ def print_menu():
     print("7- Ejecutar Requerimiento 6")
     print("8- Ejecutar Requerimiento 7")
     print("9- Ejecutar Requerimiento 8")
+    print("10- Ejecutar Requerimiento 9")
     print("0- Salir")
 
 
@@ -150,6 +151,13 @@ def print_req_8(control):
     # TODO: Imprimir el resultado del requerimiento 8
     pass
 
+def print_req_9(control):
+    """
+        Función que imprime la solución del Requerimiento 8 en consola
+    """
+    # TODO: Imprimir el resultado del requerimiento 8
+    pass
+
 
 # Se crea el controlador asociado a la vista
 control = new_controller()
@@ -200,6 +208,10 @@ def menu_cycle():
 
         elif int(inputs) == 9:
             print_req_8(control)
+            
+        elif int(inputs) == 10:
+            print_req_9(control)
+            
 
         elif int(inputs) == 0:
             working = False
