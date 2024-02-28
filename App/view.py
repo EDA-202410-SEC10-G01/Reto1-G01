@@ -165,6 +165,19 @@ if __name__ == "__main__":
     """
     Menu principal
     """
+    tipo_opcion_lista = True
+    while tipo_opcion_lista:
+        print("1. Single linked")
+        print("2. Array list")
+        tipo_lista = int(input("Seleccione si quiere usar single linked o array list:"))
+        if tipo_lista == 1:
+            tipo_seleccionado = "LINKED_LIST"
+            tipo_opcion_lista = False
+        elif tipo_lista == 2:
+            tipo_seleccionado = "ARRAY_LIST"
+            tipo_opcion_lista = False
+        else:
+            print("Error no se reconocio la opcion que quiere.")
     working = True
     #ciclo del menu
     while working:
