@@ -105,12 +105,13 @@ def newJob(id, published_at, title, company_name, experience_level, country_code
            "experience_level": experience_level,
            "country_code": country_code,
            "city": city
-    }
-    return job
+    }    
     """
     Crea una nueva estructura para modelar los datos
     """
     #TODO: Crear la función para estructurar los datos
+    return job
+
     
 def newSkill(name, level, id):
     skill = {"name":name,
@@ -151,11 +152,12 @@ def multilocationssize(catalog):
 def employmentssize(catalog):
     return lt.size(catalog["employments"])    
 
-def req_1(data_structs):
+def req_1(catalog, Number, country_code, level):
     """
     Función que soluciona el requerimiento 1
     """
     # TODO: Realizar el requerimiento 1
+    oferta=
     pass
 
 
