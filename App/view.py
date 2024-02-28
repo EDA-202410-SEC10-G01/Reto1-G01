@@ -86,7 +86,14 @@ def print_req_1(control):
         Función que imprime la solución del Requerimiento 1 en consola
     """
     # TODO: Imprimir el resultado del requerimiento 1
-    pass
+    print("Introduzca la cantidad de ofertas que desea ver")
+    Number=int(input())
+    print("Introduzca el codigo del país")
+    country_code=str(input())
+    print("Introduzca el nivel de experiencia")
+    level=str(input())
+    control.req_1(Number, country_code, level, control)
+    
 
 
 def print_req_2(control):
@@ -153,18 +160,18 @@ def print_req_9(control):
 
 
 # Se crea el controlador asociado a la vista
+
 control = new_controller()
 
 default_limit=1000
+
 # main del reto
-if __name__ == "__main__":
-    threading.stack_size(67108864*2) # 128MB stack
-    sys.setrecursionlimit(default_limit*1000000)
-    thread = threading.Thread(target=__name__)
-    thread.start()
-    """
-    Menu principal
-    """
+
+"""
+Menu principal
+"""
+
+def menu_cycle():
     tipo_opcion_lista = True
     while tipo_opcion_lista:
         print("1. Single linked")
@@ -227,3 +234,8 @@ if __name__ == "__main__":
         else:
             print("Opción errónea, vuelva a elegir.\n")
     sys.exit(0)
+if __name__ == "__main__":
+    threading.stack_size(67108864*2) # 128MB stack
+    sys.setrecursionlimit(default_limit*1000000)
+    thread = threading.Thread(target=menu_cycle())
+    thread.start()
