@@ -157,7 +157,7 @@ def req_1(catalog, Number, country_code, level):
     Función que soluciona el requerimiento 1
     """
     # TODO: Realizar el requerimiento 1
-    oferta=
+    #oferta=
     pass
 
 
@@ -169,12 +169,19 @@ def req_2(data_structs):
     pass
 
 
-def req_3(data_structs):
+def req_3(nombre_empresa, anio_inicial, anio_final, data_structs):
     """
     Función que soluciona el requerimiento 3
     """
     # TODO: Realizar el requerimiento 3
-    pass
+    ofertas = {}
+    for item in data_structs["jobs"]["elements"]:
+        fecha_oferta = item["published_at"]
+        anio_oferta = int(fecha_oferta[:4])
+        if nombre_empresa == item["company_name"] and anio_oferta >= anio_inicial and anio_oferta <= anio_final:
+            ofertas["empleo"] = item["title"]
+            ofertas["fecha"] = anio_oferta
+    return ofertas
 
 
 def req_4(data_structs):

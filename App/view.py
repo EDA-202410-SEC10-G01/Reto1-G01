@@ -109,7 +109,20 @@ def print_req_3(control):
         Función que imprime la solución del Requerimiento 3 en consola
     """
     # TODO: Imprimir el resultado del requerimiento 3
-    pass
+    print("Introduzca la empresa que quieres buscar: ")
+    nombre_empresa = str(input())
+    print("Introduzca el año inicial del periodo de busqueda: ")
+    anio_inicial = int(input())
+    print("Introduzca el año final del periodo de busqueda: ")
+    anio_final = int(input())
+    req3 = controller.req_3(nombre_empresa, anio_inicial, anio_final, control)
+    if not req3:
+        print("No se encontraron ofertas de trabajo de la empresa que buscas en el periodo de tiempo seleccionado")
+    else:
+        print("Se encontraron los siguientes empleos:")
+        for i in req3:
+            print(req3["empleo"], req3["fecha"])
+    
 
 
 def print_req_4(control):

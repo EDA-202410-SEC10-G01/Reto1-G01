@@ -119,7 +119,6 @@ def req_1(Number, country_code, level, control):
     # TODO: Modificar el requerimiento 1
     Ofertas = model.req_1(control["model"], Number, country_code, level)
     return Ofertas
-    pass
 
 
 def req_2(control):
@@ -130,12 +129,12 @@ def req_2(control):
     pass
 
 
-def req_3(control):
+def req_3(nombre_empresa, anio_inicial, anio_final, control):
     """
     Retorna el resultado del requerimiento 3
     """
     # TODO: Modificar el requerimiento 3
-    pass
+    return model.req_3(nombre_empresa, anio_inicial, anio_final, control["model"])
 
 
 def req_4(control):
