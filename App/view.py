@@ -115,6 +115,7 @@ def print_req_3(control):
     anio_inicial = int(input())
     print("Introduzca el año final del periodo de busqueda: ")
     anio_final = int(input())
+    print("Buscando ofertas de trabajo... ")
     req3 = controller.req_3(nombre_empresa, anio_inicial, anio_final, control)
     if not req3:
         print("No se encontraron ofertas de trabajo de la empresa que buscas en el periodo de tiempo seleccionado")
