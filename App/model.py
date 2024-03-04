@@ -169,19 +169,40 @@ def req_2(data_structs):
     pass
 
 
-def req_3(nombre_empresa, anio_inicial, anio_final, data_structs):
+def req_3(nombre_empresa, fecha_inicial, fecha_final, data_structs):
     """
     Función que soluciona el requerimiento 3
     """
     # TODO: Realizar el requerimiento 3
-    ofertas = {}
+    ofertas = []
+    def nueva_oferta(fecha, empleo, habilidad, ciudad, pais, tamaño, tipo_lugar, ucranianos):
+        dict_oferta = {"fecha": fecha,
+                       "empleo": empleo,
+                       "habilidad": habilidad,
+                       "ciudad": ciudad,
+                       "pais": pais,
+                       "tamaño": tamaño,
+                       "tipo_lugar": tipo_lugar,
+                       "ucranianos": ucranianos}
+        return dict_oferta
+    anio_inicial = int(fecha_inicial[:4])
+    mes_inicial = int(fecha_inicial[6:7])
+    dia_inicial = int(fecha_inicial[9:10])
+    anio_final = int(fecha_final[:4])
+    mes_final = int(fecha_final[6:7])
+    dia_final = int(fecha_final[9:10])
     for item in data_structs["jobs"]["elements"]:
         fecha_oferta = item["published_at"]
         anio_oferta = int(fecha_oferta[:4])
-        if nombre_empresa == item["company_name"] and anio_oferta >= anio_inicial and anio_oferta <= anio_final:
-            ofertas["empleo"] = item["title"]
-            ofertas["fecha"] = anio_oferta
-    return ofertas
+        mes_oferta = int(fecha_oferta[6:7])
+        dia_oferta = int(fecha_oferta[9:10])
+        if (nombre_empresa == item["company_name"] and anio_oferta >= anio_inicial and anio_oferta <= anio_final and 
+            mes_oferta >= mes_inicial and mes_oferta <= mes_final and dia_oferta >= dia_inicial and dia_oferta <= dia_final):
+            oferta = nueva_oferta(fecha_oferta, item["title"], item["experience_level"], item["city"], item["country_code"], item["company_size"],
+                   item["workplace_type"], item["open_to_hire_ukrainians"])
+            ofertas.append(oferta)
+    ofertas_ordenadas = sorted(ofertas, key=lambda x: (x["fecha"], x["pais"]))
+    return ofertas_ordenadas
 
 
 def req_4(data_structs):

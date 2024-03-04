@@ -111,18 +111,25 @@ def print_req_3(control):
     # TODO: Imprimir el resultado del requerimiento 3
     print("Introduzca la empresa que quieres buscar: ")
     nombre_empresa = str(input())
-    print("Introduzca el año inicial del periodo de busqueda: ")
-    anio_inicial = int(input())
-    print("Introduzca el año final del periodo de busqueda: ")
-    anio_final = int(input())
+    print("Introduzca la fecha inicial del periodo de busqueda: ")
+    anio_inicial = int(input("Año: "))
+    mes_inicial = int(input("Mes: "))
+    dia_inicial = int(input("Dia: "))
+    fecha_inicial = anio_inicial+"-"+mes_inicial+"-"+dia_inicial
+    print("Introduzca la fecha final del de busqueda: ")
+    anio_final = int(input("Año: "))
+    mes_final = int(input("Mes: "))
+    dia_final = int(input("Dia: "))
+    fecha_final = anio_final+"-"+mes_final+"-"+dia_final
     print("Buscando ofertas de trabajo... ")
-    req3 = controller.req_3(nombre_empresa, anio_inicial, anio_final, control)
-    if not req3:
+    ofertas, numero_ofertas, junior, mid, senior = controller.req_3(nombre_empresa, fecha_inicial, fecha_final, control)
+    if not ofertas:
         print("No se encontraron ofertas de trabajo de la empresa que buscas en el periodo de tiempo seleccionado")
     else:
-        print("Se encontraron los siguientes empleos:")
-        for i in req3:
-            print(req3["empleo"], req3["fecha"])
+        print("Se encontraron ", numero_ofertas," empleos, de los cuales",junior,"son junior,", mid, "son mid, y", senior,"son senior:")
+        for item in ofertas:
+            print(item["fecha"], item["empleo"], item["habilidad"], item["ciudad"], item["pais"], item["tamaño"], item["tipo_lugar"], item["ucranianos"])
+
     
 
 

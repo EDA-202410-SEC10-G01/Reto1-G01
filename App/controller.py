@@ -129,12 +129,24 @@ def req_2(control):
     pass
 
 
-def req_3(nombre_empresa, anio_inicial, anio_final, control):
+def req_3(nombre_empresa, fecha_inicial, fehca_final, control):
     """
     Retorna el resultado del requerimiento 3
     """
     # TODO: Modificar el requerimiento 3
-    return model.req_3(nombre_empresa, anio_inicial, anio_final, control["model"])
+    ofertas = model.req_3(nombre_empresa, fecha_inicial, fehca_final, control["model"])
+    numero_ofertas = len(ofertas)
+    junior = 0
+    mid = 0
+    senior = 0
+    for item in ofertas:
+        if item["habilidad"] == "junior":
+            junior += 1
+        elif item["habilidad"] == "mid":
+            mid += 1
+        elif item["habilidad"] == "senior":
+            senior +=1
+    return ofertas, numero_ofertas, junior, mid, senior
 
 
 def req_4(control):
