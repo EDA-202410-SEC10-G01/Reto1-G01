@@ -76,6 +76,9 @@ def addjob(catalog, data):
                   data["company_name"], 
                   data["experience_level"], 
                   data["country_code"], 
+                  data["company_size"],
+                  data["workplace_type"],
+                  data["open_to_hire_ukrainians"],
                   data["city"])
     lt.addLast(catalog["jobs"],j)
     return catalog
@@ -98,13 +101,16 @@ def addmultilocations(catalog, data):
 
 # Funciones para creacion de datos
 
-def newJob(id, published_at, title, company_name, experience_level, country_code, city):
+def newJob(id, published_at, title, company_name, experience_level, country_code, company_size, workplace_type, open_to_hire_ukrainians, city):
     job = {"id":id,
            "published_at":published_at,
            "title":title,
            "company_name":company_name,
            "experience_level": experience_level,
            "country_code": country_code,
+           "company_size": company_size,
+           "workplace_type": workplace_type,
+           "open_to_hire_ukrainians": open_to_hire_ukrainians,
            "city": city
     }    
     """
@@ -246,6 +252,7 @@ def req_6(data_structs, top, habilidad, fecha_inicial, fecha_final):
         numero_ofertas = len(info_ciudad)
         salario = info_ciudad["salary"]
         empresas = info_ciudad["company_name"].nunique()
+        mayor_oferta = info_ciudad["compane_name"]
 
 
 
