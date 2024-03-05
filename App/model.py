@@ -26,6 +26,7 @@
 
 
 import config as cf
+import pandas as pd
 from DISClib.ADT import list as lt
 from DISClib.ADT import stack as st
 from DISClib.ADT import queue as qu
@@ -227,12 +228,27 @@ def req_5(data_structs):
     pass
 
 
-def req_6(data_structs):
+def req_6(data_structs, top, habilidad, fecha_inicial, fecha_final):
     """
     Función que soluciona el requerimiento 6
     """
     # TODO: Realizar el requerimiento 6
-    pass
+    data_trabajos = pd.DataFrame(data_structs["jobs"]["elements"])
+    data_habilidades = pd.DataFrame(data_structs["skills"]["elements"])
+    for i in data_trabajos:
+        for j in data_habilidades:
+            if i["id"] == j["id"]:
+                salario_promedio = (j["salary_from"] + j["salary_to"]) / 2
+                data_trabajos["salary"] = salario_promedio
+    trabajos_ordenados = data_trabajos[(data_trabajos["experience_level"] == habilidad) & (data_trabajos["published_at"] >= fecha_inicial) & (data_trabajos["published_at"] <= fecha_final)]
+    ciudades = trabajos_ordenados.groupby("city")
+    for ciudad, info_ciudad in ciudades:
+        numero_ofertas = len(info_ciudad)
+        salario = info_ciudad["salary"]
+        empresas = info_ciudad["company_name"].nunique()
+
+
+
 
 
 def req_7(data_structs):
