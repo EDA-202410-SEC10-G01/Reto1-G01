@@ -27,6 +27,7 @@
 
 import config as cf
 import pandas as pd
+from datetime import datetime as dt
 from DISClib.ADT import list as lt
 from DISClib.ADT import stack as st
 from DISClib.ADT import queue as qu
@@ -223,6 +224,7 @@ def req_4(data_structs, country_code, fecha_inicial, fecha_final):
     Función que soluciona el requerimiento 4
     """
     # TODO: Realizar el requerimiento 4
+    fecha_inicial=dt.strptime(fecha_inicial, "%Y-%m-%d")
     pass
 
 
