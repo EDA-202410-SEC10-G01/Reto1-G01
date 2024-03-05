@@ -164,6 +164,8 @@ def req_1(data_structs, Number, country_code, level):
             oferta.append(item)
             if len(oferta) == Number:
                 return oferta
+    if len(oferta)<Number:
+        return oferta
 
 
 def req_2(data_structs):
