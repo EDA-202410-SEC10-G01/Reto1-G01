@@ -137,6 +137,10 @@ def print_req_4(control):
     """
         Función que imprime la solución del Requerimiento 4 en consola
     """
+    country_code=str(input("Introduzca el codigo de pais que quiere buscar"))
+    fecha_inicial=str(input("introduzca la fecha inicial por faovr introducirla en formato %Y-%m-%d"))
+    fecha_final=str(input("Ahora la fecha final"))
+    resultado=controller.req_4(control, country_code, fecha_inicial, fecha_final)
     # TODO: Imprimir el resultado del requerimiento 4
     pass
 
@@ -204,12 +208,6 @@ def print_req_8(control):
     # TODO: Imprimir el resultado del requerimiento 8
     pass
 
-def print_req_9(control):
-    """
-        Función que imprime la solución del Requerimiento 8 en consola
-    """
-    # TODO: Imprimir el resultado del requerimiento 8
-    pass
 
 
 # Se crea el controlador asociado a la vista
@@ -225,19 +223,6 @@ Menu principal
 """
 
 def menu_cycle():
-    tipo_opcion_lista = True
-    while tipo_opcion_lista:
-        print("1. Single linked")
-        print("2. Array list")
-        tipo_lista = int(input("Seleccione si quiere usar single linked o array list:"))
-        if tipo_lista == 1:
-            tipo_seleccionado = "LINKED_LIST"
-            tipo_opcion_lista = False
-        elif tipo_lista == 2:
-            tipo_seleccionado = "ARRAY_LIST"
-            tipo_opcion_lista = False
-        else:
-            print("Error no se reconocio la opcion que")
     working = True
     #ciclo del menu
     while working:
@@ -276,9 +261,6 @@ def menu_cycle():
 
         elif int(inputs) == 9:
             print_req_8(control)
-            
-        elif int(inputs) == 10:
-            print_req_9(control)
             
 
         elif int(inputs) == 0:

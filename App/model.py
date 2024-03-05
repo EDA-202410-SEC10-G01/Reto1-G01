@@ -212,7 +212,7 @@ def req_3(nombre_empresa, fecha_inicial, fecha_final, data_structs):
     return ofertas_ordenadas
 
 
-def req_4(data_structs):
+def req_4(data_structs, country_code, fecha_inicial, fecha_final):
     """
     Función que soluciona el requerimiento 4
     """
