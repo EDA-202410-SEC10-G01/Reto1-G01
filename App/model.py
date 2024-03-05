@@ -27,6 +27,7 @@
 
 import config as cf
 import pandas as pd
+from datetime import datetime as dt
 from DISClib.ADT import list as lt
 from DISClib.ADT import stack as st
 from DISClib.ADT import queue as qu
@@ -174,12 +175,19 @@ def req_1(data_structs, Number, country_code, level):
         return oferta
 
 
-def req_2(data_structs):
+def req_2(data_structs, ciudad_oferta, nombre_empresa, n_ofertas):
     """
     Función que soluciona el requerimiento 2
     """
     # TODO: Realizar el requerimiento 2
-    pass
+    oferta = []
+    for value in data_structs["jobs"]["elements"]:
+        if ciudad_oferta in value["city"] and nombre_empresa in value["company_name"]:
+            oferta.append(value)
+            if len(oferta) == n_ofertas:
+                return oferta
+    if len(oferta)<n_ofertas:
+        return oferta
 
 
 def req_3(nombre_empresa, fecha_inicial, fecha_final, data_structs):
@@ -218,18 +226,39 @@ def req_3(nombre_empresa, fecha_inicial, fecha_final, data_structs):
     return ofertas_ordenadas
 
 
-def req_4(data_structs):
+def req_4(data_structs, country_code, fecha_inicial, fecha_final):
     """
     Función que soluciona el requerimiento 4
     """
     # TODO: Realizar el requerimiento 4
+    fecha_inicial=dt.strptime(fecha_inicial, "%Y-%m-%d")
     pass
 
 
-def req_5(data_structs):
+def req_5(data_structs, ciudad, fecha_inicial, fecha_final):
     """
     Función que soluciona el requerimiento 5
     """
+    index = 0
+    nueva_lista = []
+    lista_ciudad = data_structs["jobs"]["elements"]["city"]
+    lista_fechas = data_structs["jobs"]["elements"]["published_at"]
+    for values in lista_ciudad:
+        if values == ciudad:
+            fecha = dt.strptime(lista_fechas[index], "%Y-%m-%dT%H:%M:%S.%fZ")
+            index += 1
+            fecha_tupla = (fecha.year, fecha.month, fecha.day, fecha.hour, fecha.minute, fecha.second)
+            tupla_general = (values, fecha_tupla)
+            nueva_lista.append(tupla_general)
+        else:
+            index += 1
+        
+        
+    return nueva_lista
+            
+            
+            
+            
     # TODO: Realizar el requerimiento 5
     pass
 
