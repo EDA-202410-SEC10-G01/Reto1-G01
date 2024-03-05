@@ -86,13 +86,13 @@ def print_req_1(control):
         Función que imprime la solución del Requerimiento 1 en consola
     """
     # TODO: Imprimir el resultado del requerimiento 1
-    print("Introduzca la cantidad de ofertas que desea ver")
-    Number=int(input())
-    print("Introduzca el codigo del país")
-    country_code=str(input())
-    print("Introduzca el nivel de experiencia")
-    level=str(input())
-    control.req_1(Number, country_code, level, control)
+    Number=int(input("Introduzca la cantidad de ofertas que desea ver"))
+    country_code=str(input("Introduzca el codigo del país"))
+    level=str(input("Introduzca el nivel de experiencia"))
+    resultado=controller.req_1(Number, country_code, level, control)
+    print("El numero de ofertas mostradas es ", Number , ", el nivel requerido pedido es " , level , " y el codigo de pais es " , country_code)
+    print(tabulate(resultado))
+    return resultado
     
 
 

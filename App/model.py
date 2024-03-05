@@ -152,13 +152,17 @@ def multilocationssize(catalog):
 def employmentssize(catalog):
     return lt.size(catalog["employments"])    
 
-def req_1(catalog, Number, country_code, level):
+def req_1(data_structs, Number, country_code, level):
     """
     Función que soluciona el requerimiento 1
     """
     # TODO: Realizar el requerimiento 1
-    #oferta=
-    pass
+    oferta=[]
+    for item in data_structs["jobs"]["elements"]:
+        if country_code in item["country_code"] and level in item["experience_level"]:
+            oferta.append(item)
+            if len(oferta) == Number:
+                return oferta
 
 
 def req_2(data_structs):
