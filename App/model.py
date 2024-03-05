@@ -252,11 +252,8 @@ def req_6(data_structs, top, habilidad, fecha_inicial, fecha_final):
         numero_ofertas = len(info_ciudad)
         salario = info_ciudad["salary"]
         empresas = info_ciudad["company_name"].nunique()
-        mayor_oferta = info_ciudad["compane_name"]
-
-
-
-
+        mayor_oferta = info_ciudad["compane_name"].value_counts().idxmax()
+        cuenta_mayor_oferta = info_ciudad["compane_name"].value_counts().max()
 
 def req_7(data_structs):
     """
