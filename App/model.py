@@ -264,8 +264,8 @@ def req_5(data_structs, ciudad, fecha_inicial, fecha_final):
     Función que soluciona el requerimiento 5
     """
     # TODO: Realizar el requerimiento 5
-    datetime.strptime(fecha_inicial, "%Y-%m-%dT%H:%M:%S.%fZ") #convierte la fecha inicial en el formato indicado
-    datetime.strptime(fecha_final, "%Y-%m-%dT%H:%M:%S.%fZ") #convierte la fecha inicial en el formato indicado
+    dt.strptime(fecha_inicial, "%Y-%m-%dT%H:%M:%S.%fZ") #convierte la fecha inicial en el formato indicado
+    dt.strptime(fecha_final, "%Y-%m-%dT%H:%M:%S.%fZ") #convierte la fecha inicial en el formato indicado
     
     index = 0 #crea una variable index = 0 
     lista_temporal = [] #crea una variable lista_temporal = []
@@ -274,9 +274,7 @@ def req_5(data_structs, ciudad, fecha_inicial, fecha_final):
     lista_fechas = data_structs["jobs"]["elements"]["published_at"] #obtiene la lista de fechas de ofertas
     for values in lista_ciudad: #recorre la lista de ciudades
         if values == ciudad: #si values es igual a la ciudad que pide el usuario
-            fecha = datetime.strptime(lista_fechas[index], "%Y-%m-%dT%H:%M:%S.%fZ") #se crea una variable fecha = la fecha respectiva en el formato indicado
-            fecha_tupla = (fecha.year, fecha.month, fecha.day, fecha.hour, fecha.minute, fecha.second) #crea una tupla para agrupar los valores de la fecha de oferta
-            tupla_general = (values, fecha_tupla, lista_empresa[index]) #se crea una tupla general que agrupa la ciudad y su respectiva fecha de oferta
+            tupla_general = (values, lista_fechas[index], lista_empresa[index]) #se crea una tupla general que agrupa la ciudad y su respectiva fecha de oferta
             lista_temporal.append(tupla_general) #se anade a la lista temporal la tupla antes creada
             index += 1 #se suma 1 a index
         else: 
@@ -284,14 +282,12 @@ def req_5(data_structs, ciudad, fecha_inicial, fecha_final):
 
     index = 0 #se actualiza el valor de index de vuelta a 0
     return_lista = [] #se crea una variable return_lista = []
-    for comparing in lista_temporal: #recorre la lista_temporal 
-        if fecha_final.year + fecha_final.month + fecha_final.day + fecha_final.hour + fecha_final.minute + fecha_final.second > comparing[index][1][0] + comparing[index][1][1] + comparing[index][1][2]+ comparing[index][1][3]+ comparing[index][1][4]+ comparing[index][1][5] > fecha_inicial.year + fecha_inicial.month + fecha_inicial.day+ fecha_inicial.hour+ fecha_inicial.minute+ fecha_inicial.second:
+    for index in len(lista_temporal): #recorre la lista_temporal
+        fecha = dt.strptime(lista_fechas[index], "%Y-%m-%dT%H:%M:%S.%fZ") #se crea una variable fecha = la fecha respectiva en el formato indicado 
+        if fecha_final.year + fecha_final.month + fecha_final.day + fecha_final.hour + fecha_final.minute + fecha_final.second > fecha.year + fecha.month + fecha.day + fecha.hour + fecha.minute + fecha.second > fecha_inicial.year + fecha_inicial.month + fecha_inicial.day+ fecha_inicial.hour+ fecha_inicial.minute+ fecha_inicial.second:
             #compara la fecha que se esta iterando con el limite establecido por el usuario
             return_lista.append(lista_temporal[index]) #si se cumple la condicion, anade la tupla a la lista final
-            index += 1 #anade 1 a index
-        else:
-            index += 1 #anade 1 a index
-    return return_lista
+    return return_lista, len(lista_temporal)
 
 
 def req_6(data_structs, top, habilidad, fecha_inicial, fecha_final):
