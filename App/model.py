@@ -264,8 +264,8 @@ def req_5(data_structs, ciudad, fecha_inicial, fecha_final):
     Función que soluciona el requerimiento 5
     """
     # TODO: Realizar el requerimiento 5
-    dt.strptime(fecha_inicial, "%Y-%m-%dT%H:%M:%S.%fZ") #convierte la fecha inicial en el formato indicado
-    dt.strptime(fecha_final, "%Y-%m-%dT%H:%M:%S.%fZ") #convierte la fecha inicial en el formato indicado
+    datetime.strptime(fecha_inicial, "%Y-%m-%dT%H:%M:%S.%fZ") #convierte la fecha inicial en el formato indicado
+    datetime.strptime(fecha_final, "%Y-%m-%dT%H:%M:%S.%fZ") #convierte la fecha inicial en el formato indicado
     
     index = 0 #crea una variable index = 0 
     lista_temporal = [] #crea una variable lista_temporal = []
@@ -274,7 +274,7 @@ def req_5(data_structs, ciudad, fecha_inicial, fecha_final):
     lista_fechas = data_structs["jobs"]["elements"]["published_at"] #obtiene la lista de fechas de ofertas
     for values in lista_ciudad: #recorre la lista de ciudades
         if values == ciudad: #si values es igual a la ciudad que pide el usuario
-            fecha = dt.strptime(lista_fechas[index], "%Y-%m-%dT%H:%M:%S.%fZ") #se crea una variable fecha = la fecha respectiva en el formato indicado
+            fecha = datetime.strptime(lista_fechas[index], "%Y-%m-%dT%H:%M:%S.%fZ") #se crea una variable fecha = la fecha respectiva en el formato indicado
             fecha_tupla = (fecha.year, fecha.month, fecha.day, fecha.hour, fecha.minute, fecha.second) #crea una tupla para agrupar los valores de la fecha de oferta
             tupla_general = (values, fecha_tupla, lista_empresa[index]) #se crea una tupla general que agrupa la ciudad y su respectiva fecha de oferta
             lista_temporal.append(tupla_general) #se anade a la lista temporal la tupla antes creada
