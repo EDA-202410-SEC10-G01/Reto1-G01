@@ -101,7 +101,12 @@ def print_req_2(control):
         Función que imprime la solución del Requerimiento 2 en consola
     """
     # TODO: Imprimir el resultado del requerimiento 2
-    pass
+    ciudad_oferta = input("Introduzca la ciudad a connsultar")
+    nombre_empresa = input("Introduzca el nombre completo de la empresa de la que se quiere sacar las ofertas")
+    n_ofertas = input("Introduzca la cantidad de ofertas que desea ver")
+    resultado = controller.req_2(control, ciudad_oferta, nombre_empresa, n_ofertas)
+    print(tabulate(resultado))
+    return resultado
 
 
 def print_req_3(control):
@@ -160,6 +165,13 @@ def print_req_5(control):
         Función que imprime la solución del Requerimiento 5 en consola
     """
     # TODO: Imprimir el resultado del requerimiento 5
+    ciudad = input("Introduzca el nombre de la ciudad")
+    fecha_inicial = input("Introduzca la fecha inicial en formato: %Y-%m-%d")
+    fecha_inicial+="T00:00:00.0Z"
+    fecha_final = input("Introduzca la fecha final en formato: %Y-%m-%d")
+    fecha_final+="T00:00:00.0Z"
+    resultado = controller.req_5(control, ciudad, fecha_inicial, fecha_final)
+    print(tabulate(resultado))
     pass
 
 

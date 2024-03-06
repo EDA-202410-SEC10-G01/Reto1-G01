@@ -264,30 +264,50 @@ def req_5(data_structs, ciudad, fecha_inicial, fecha_final):
     Función que soluciona el requerimiento 5
     """
     # TODO: Realizar el requerimiento 5
-    dt.strptime(fecha_inicial, "%Y-%m-%dT%H:%M:%S.%fZ") #convierte la fecha inicial en el formato indicado
-    dt.strptime(fecha_final, "%Y-%m-%dT%H:%M:%S.%fZ") #convierte la fecha inicial en el formato indicado
-    
-    index = 0 #crea una variable index = 0 
-    lista_temporal = [] #crea una variable lista_temporal = []
-    lista_empresa = data_structs["jobs"]["elements"]["company_name"] #obtiene la lista de companias
-    lista_ciudad = data_structs["jobs"]["elements"]["city"] #obtiene la lista de ciudades donde hay ofertas
-    lista_fechas = data_structs["jobs"]["elements"]["published_at"] #obtiene la lista de fechas de ofertas
-    for values in lista_ciudad: #recorre la lista de ciudades
-        if values == ciudad: #si values es igual a la ciudad que pide el usuario
-            tupla_general = (values, lista_fechas[index], lista_empresa[index]) #se crea una tupla general que agrupa la ciudad y su respectiva fecha de oferta
-            lista_temporal.append(tupla_general) #se anade a la lista temporal la tupla antes creada
-            index += 1 #se suma 1 a index
-        else: 
-            index += 1 #se suma 1 a index
-
-    index = 0 #se actualiza el valor de index de vuelta a 0
-    return_lista = [] #se crea una variable return_lista = []
-    for index in len(lista_temporal): #recorre la lista_temporal
-        fecha = dt.strptime(lista_fechas[index], "%Y-%m-%dT%H:%M:%S.%fZ") #se crea una variable fecha = la fecha respectiva en el formato indicado 
+    datetime.strptime(fecha_inicial, "%Y-%m-%dT%H:%M:%S.%fZ")
+    datetime.strptime(fecha_final, "%Y-%m-%dT%H:%M:%S.%fZ")
+    lista_temporal = []
+    for item in data_structs["jobs"]["elements"]:
+        if item["city"] == ciudad:
+            a = item["company_name"]
+            b = item["city"]
+            c = item["published_at"]
+            d = item["title"]
+            e = item["workplace_type"]
+            f = item["company_size"]
+            tupla_general = (c, d, a, e, f)
+            lista_temporal.append(tupla_general)
+            
+    index = 0
+    return_lista = []
+    for index in range (0, len(lista_temporal)):
+        fecha = datetime.strptime(lista_temporal[index][0], "%Y-%m-%dT%H:%M:%S.%fZ")
         if fecha_final.year + fecha_final.month + fecha_final.day + fecha_final.hour + fecha_final.minute + fecha_final.second > fecha.year + fecha.month + fecha.day + fecha.hour + fecha.minute + fecha.second > fecha_inicial.year + fecha_inicial.month + fecha_inicial.day+ fecha_inicial.hour+ fecha_inicial.minute+ fecha_inicial.second:
-            #compara la fecha que se esta iterando con el limite establecido por el usuario
-            return_lista.append(lista_temporal[index]) #si se cumple la condicion, anade la tupla a la lista final
-    return return_lista, len(lista_temporal)
+            return_lista.append(lista_temporal[index])
+            
+    index = 0
+    counter_n_empresas = 0
+    for anothervalues in return_lista:
+        if anothervalues[index][2] not in return_lista[index + 1]:
+            counter_n_empresas +=1
+            index +=1
+    index = 0
+    dict_empresas = {}
+    for notanothercounter in return_lista:
+        if return_lista[notanothercounter][index][2] in dict_empresas:
+            dict_empresas[return_lista[notanothercounter][2]] += 1
+            index += 1
+        else:
+            dict_empresas[return_lista[notanothercounter][2]] = 1
+            index += 1
+            
+    mayor_n = max(dict_empresas, key=dict_empresas.get)
+    menor_n = min(dict_empresas, key=dict_empresas.get)
+    
+    return0_lista = []
+    for i in len(return_lista):
+        return0_lista.append(return_lista[i][0], return_lista[i][1], return_lista[i][2], return_lista[i][3], return_lista[i][4])
+    return return0_lista, len(return0_lista), counter_n_empresas, mayor_n, menor_n
 
 
 def req_6(data_structs, top, habilidad, fecha_inicial, fecha_final):
