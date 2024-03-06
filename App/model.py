@@ -231,16 +231,8 @@ def req_4(data_structs, country_code, fecha_inicial, fecha_final):
     Función que soluciona el requerimiento 4
     """
     # TODO: Realizar el requerimiento 4
-    oferta=lt.newList("ARRAY_LIST")
     fecha_inicial=dt.strptime(fecha_inicial, "%Y-%m-%d")
-    fecha_final=dt.strptime(fecha_final, "%Y-%m-%d")
-    for item in data_structs["jobs"]["elements"]:
-        if country_code in item:
-            a=item["published_at"]
-            a=dt.strptime(a, "%Y-%m-%d")
-            if a>fecha_inicial and a<fecha_final:
-                lt.addLast(oferta, item)
-            
+    pass
 
 
 def req_5(data_structs, ciudad, fecha_inicial, fecha_final):
@@ -271,18 +263,28 @@ def req_5(data_structs, ciudad, fecha_inicial, fecha_final):
     pass
 
 
-def req_6(data_structs, top, habilidad, fecha_inicial, fecha_final):
+def req_6(data_structs, top, habilidad, fecha_inicial, fecha_final, pais):
     """
     Función que soluciona el requerimiento 6
     """
     # TODO: Realizar el requerimiento 6
-    data_habilidades = data_structs["employments"]["elements"]
+    def salario_to_int(salario):
+        if salario == "":
+            return None
+        return int(salario)
     data_trabajos = pd.DataFrame(data_structs["jobs"]["elements"])
     data_habilidades = pd.DataFrame(data_structs["employments"]["elements"])
-    data_trabajos["average_salary"] = data_habilidades[["salary_from", "salary_to"]].mean(axis=1)
-    trabajos_ordenados = data_trabajos[(data_trabajos["experience_level"] == habilidad) & (data_trabajos["published_at"] >= fecha_inicial) & (data_trabajos["published_at"] <= fecha_final)]
-    ciudades = trabajos_ordenados.groupby("city")
-
+    data_habilidades["salary_from"] = data_habilidades["salary_from"].apply(salario_to_int)
+    data_habilidades["salary_to"] = data_habilidades["salary_to"].apply(salario_to_int)
+    data_habilidades = data_habilidades.dropna()
+    data_trabajos["average_maximum_salary"] = sum(data_habilidades["salary_to"]) / data_habilidades.shape[0]
+    data_trabajos["average_minimum_salary"] = sum(data_habilidades["salary_from"]) / data_habilidades.shape[0]
+    if pais != "":
+        trabajos_ordenados = data_trabajos[(data_trabajos["experience_level"] == habilidad) & (data_trabajos["published_at"] >= fecha_inicial) & (data_trabajos["published_at"] <= fecha_final) & (data_trabajos["country_code"] == pais)]
+    else:
+        trabajos_ordenados = data_trabajos[(data_trabajos["experience_level"] == habilidad) & (data_trabajos["published_at"] >= fecha_inicial) & (data_trabajos["published_at"] <= fecha_final)]
+    ciudades = trabajos_ordenados.groupby("city")["city"].count()
+    print(ciudades)
 
 
 def req_7(data_structs):

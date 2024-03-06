@@ -191,7 +191,8 @@ def print_req_6(control):
     mes_final = str(input("Mes: "))
     dia_final = str(input("Dia: "))
     fecha_final = anio_final+"-"+mes_final+"-"+dia_final
-    req6 = controller.req_6(control, top, habilidad, fecha_inicial, fecha_final)
+    pais = str(input("Dame el pais que necesitas: "))
+    req6 = controller.req_6(control, top, habilidad, fecha_inicial, fecha_final, pais)
     pass
 
 
