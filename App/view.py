@@ -180,14 +180,14 @@ def print_req_6(control):
         else:
             print("Selecciona un nevel de habilidad que este permitido")
     print("Introduzca la fecha inicial del periodo de busqueda: ")
-    anio_inicial = int(input("Año: "))
-    mes_inicial = int(input("Mes: "))
-    dia_inicial = int(input("Dia: "))
+    anio_inicial = str(input("Año: "))
+    mes_inicial = str(input("Mes: "))
+    dia_inicial = str(input("Dia: "))
     fecha_inicial = anio_inicial+"-"+mes_inicial+"-"+dia_inicial
     print("Introduzca la fecha final del de busqueda: ")
-    anio_final = int(input("Año: "))
-    mes_final = int(input("Mes: "))
-    dia_final = int(input("Dia: "))
+    anio_final = str(input("Año: "))
+    mes_final = str(input("Mes: "))
+    dia_final = str(input("Dia: "))
     fecha_final = anio_final+"-"+mes_final+"-"+dia_final
     req6 = controller.req_6(control, top, habilidad, fecha_inicial, fecha_final)
     pass

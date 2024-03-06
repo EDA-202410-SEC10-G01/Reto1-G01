@@ -268,16 +268,14 @@ def req_6(data_structs, top, habilidad, fecha_inicial, fecha_final):
     Función que soluciona el requerimiento 6
     """
     # TODO: Realizar el requerimiento 6
+    data_habilidades = data_structs["employments"]["elements"]
     data_trabajos = pd.DataFrame(data_structs["jobs"]["elements"])
     data_habilidades = pd.DataFrame(data_structs["employments"]["elements"])
-    for i in data_trabajos:
-        for j in data_habilidades:
-            if i["id"] == j["id"]:
-                salario_promedio = (j["salary_from"] + j["salary_to"]) / 2
-                data_trabajos["salary"] = salario_promedio
+    data_trabajos["average_salary"] = data_habilidades[["salary_from", "salary_to"]].mean(axis=1)
     trabajos_ordenados = data_trabajos[(data_trabajos["experience_level"] == habilidad) & (data_trabajos["published_at"] >= fecha_inicial) & (data_trabajos["published_at"] <= fecha_final)]
     ciudades = trabajos_ordenados.groupby("city")
-    
+
+
 
 def req_7(data_structs):
     """
