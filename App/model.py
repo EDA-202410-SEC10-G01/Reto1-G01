@@ -27,7 +27,7 @@
 
 import config as cf
 import pandas as pd
-from datetime import datetime as dt
+from datetime import datetime
 from DISClib.ADT import list as lt
 from DISClib.ADT import stack as st
 from DISClib.ADT import queue as qu
@@ -231,15 +231,31 @@ def req_4(data_structs, country_code, fecha_inicial, fecha_final):
     Función que soluciona el requerimiento 4
     """
     # TODO: Realizar el requerimiento 4
-    oferta=lt.newList("ARRAY_LIST")
-    fecha_inicial=dt.strptime(fecha_inicial, "%Y-%m-%d")
-    fecha_final=dt.strptime(fecha_final, "%Y-%m-%d")
+    oferta=[]
+    fecha_inicial=datetime.strptime(fecha_inicial, "%Y-%m-%dT%H:%M:%S.%fZ")
+    fecha_final=datetime.strptime(fecha_final, "%Y-%m-%dT%H:%M:%S.%fZ")
     for item in data_structs["jobs"]["elements"]:
-        if country_code in item:
+        if country_code in item["country_code"]:
             a=item["published_at"]
-            a=dt.strptime(a, "%Y-%m-%d")
+            a=datetime.strptime(a, "%Y-%m-%dT%H:%M:%S.%fZ")
             if a>fecha_inicial and a<fecha_final:
-                lt.addLast(oferta, item)
+                oferta.append(item)
+    ciudades={}
+    empresas={}
+    a=len(oferta)
+    for item in oferta:
+        if item["city"] not in ciudades:
+            ciudades[item["city"]]=1
+        else:
+            ciudades[item["city"]]+=1
+    for item in oferta:
+        if item["company_name"] not in empresas:
+            empresas[item["company_name"]]=1
+    num_empresas=len(empresas)
+    num_ciudades=len(ciudades)
+    mayor= max(ciudades, key=ciudades.get)
+    menor= min(ciudades, key=ciudades.get)
+    return oferta , a, ciudades, num_ciudades, num_empresas, mayor, menor
             
 
 
@@ -253,7 +269,7 @@ def req_5(data_structs, ciudad, fecha_inicial, fecha_final):
     lista_fechas = data_structs["jobs"]["elements"]["published_at"]
     for values in lista_ciudad:
         if values == ciudad:
-            fecha = dt.strptime(lista_fechas[index], "%Y-%m-%dT%H:%M:%S.%fZ")
+            fecha = datetime.strptime(lista_fechas[index], "%Y-%m-%dT%H:%M:%S.%fZ")
             index += 1
             fecha_tupla = (fecha.year, fecha.month, fecha.day, fecha.hour, fecha.minute, fecha.second)
             tupla_general = (values, fecha_tupla)
