@@ -264,8 +264,8 @@ def req_5(data_structs, ciudad, fecha_inicial, fecha_final):
     Función que soluciona el requerimiento 5
     """
     # TODO: Realizar el requerimiento 5
-    datetime.strptime(fecha_inicial, "%Y-%m-%dT%H:%M:%S.%fZ")
-    datetime.strptime(fecha_final, "%Y-%m-%dT%H:%M:%S.%fZ")
+    dt.strptime(fecha_inicial, "%Y-%m-%dT%H:%M:%S.%fZ")
+    dt.strptime(fecha_final, "%Y-%m-%dT%H:%M:%S.%fZ")
     lista_temporal = []
     for item in data_structs["jobs"]["elements"]:
         if item["city"] == ciudad:
@@ -281,7 +281,7 @@ def req_5(data_structs, ciudad, fecha_inicial, fecha_final):
     index = 0
     return_lista = []
     for index in range (0, len(lista_temporal)):
-        fecha = datetime.strptime(lista_temporal[index][0], "%Y-%m-%dT%H:%M:%S.%fZ")
+        fecha = dt.strptime(lista_temporal[index][0], "%Y-%m-%dT%H:%M:%S.%fZ")
         if fecha_final.year + fecha_final.month + fecha_final.day + fecha_final.hour + fecha_final.minute + fecha_final.second > fecha.year + fecha.month + fecha.day + fecha.hour + fecha.minute + fecha.second > fecha_inicial.year + fecha_inicial.month + fecha_inicial.day+ fecha_inicial.hour+ fecha_inicial.minute+ fecha_inicial.second:
             return_lista.append(lista_temporal[index])
             
