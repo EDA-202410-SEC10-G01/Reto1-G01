@@ -137,12 +137,20 @@ def print_req_4(control):
     """
         Función que imprime la solución del Requerimiento 4 en consola
     """
-    country_code=str(input("Introduzca el codigo de pais que quiere buscar"))
-    fecha_inicial=str(input("introduzca la fecha inicial por faovr introducirla en formato %Y-%m-%d"))
+    country_code=str(input("Introduzca el codigo de pais que quiere buscar "))
+    fecha_inicial=str(input("introduzca la fecha inicial por faovr introducirla en formato %Y-%m-%d "))
     fecha_inicial+="T00:00:00.0Z"
-    fecha_final=str(input("Ahora la fecha final"))
-    fecha_final+= "T00:00:00.0Z"
-    resultado=controller.req_4(control, country_code, fecha_inicial, fecha_final)
+    fecha_final=str(input("Ahora la fecha final %Y-%m-%d "))
+    fecha_final+="T00:00:00.0Z"
+    ofertas, size,ciudades, num_ciudades, num_empresas, mayor, menor=controller.req_4(control, country_code, fecha_inicial, fecha_final)
+    print("la cantidad de ofertas encontradas fue de", size)
+    print("La cantidad de empresas que publicaron fue de ", num_empresas)
+    print("El numero total de ciudades que publicaron fue de ", num_ciudades)
+    print("La ciudad con mas ofertas fue: ", mayor, " con un numero de ", ciudades[mayor])
+    print("La ciudad con menos ofertas fue: ", menor, " con un numero de ", ciudades[menor])
+    print("las ofertas son: ")
+    print(tabulate(ofertas))
+    
     # TODO: Imprimir el resultado del requerimiento 4
     pass
 

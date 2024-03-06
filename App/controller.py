@@ -154,6 +154,12 @@ def req_4(control):
     Retorna el resultado del requerimiento 4
     """
     # TODO: Modificar el requerimiento 4
+    ofertas,size, ciudades, num_ciudades, num_empresas, mayor, menor=model.req_4(control["model"], country_code, fecha_inicial, fecha_final)
+
+    return ofertas,size, ciudades, num_ciudades, num_empresas, mayor, menor
+        
+    
+    return ofertas
     pass
 
 
