@@ -299,6 +299,17 @@ def req_6(data_structs, top, habilidad, fecha_inicial, fecha_final, pais):
         if salario == "":
             return None
         return int(salario)
+    def nueva_ciudad(info, data_hablilidades):
+        if info["city"] not in listado_ciudades:
+            ciudad = {"nombre_ciudad": info["city"],
+                "total_ofertas": len(info),
+                "promedio_salario": info["average_maximum_salary"],
+                "total_empresas": empresas,
+                "mayor_empresa": len(info.groupby("company_name")["company_name"]),
+                "mejor_oferta": max(data_habilidades["salary_to"]),
+                "peor_oferta": min(data_habilidades["salary_to"])
+                }
+        return ciudad
     data_trabajos = pd.DataFrame(data_structs["jobs"]["elements"])
     data_habilidades = pd.DataFrame(data_structs["employments"]["elements"])
     data_habilidades["salary_from"] = data_habilidades["salary_from"].apply(salario_to_int)
@@ -310,8 +321,19 @@ def req_6(data_structs, top, habilidad, fecha_inicial, fecha_final, pais):
         trabajos_ordenados = data_trabajos[(data_trabajos["experience_level"] == habilidad) & (data_trabajos["published_at"] >= fecha_inicial) & (data_trabajos["published_at"] <= fecha_final) & (data_trabajos["country_code"] == pais)]
     else:
         trabajos_ordenados = data_trabajos[(data_trabajos["experience_level"] == habilidad) & (data_trabajos["published_at"] >= fecha_inicial) & (data_trabajos["published_at"] <= fecha_final)]
-    ciudades = trabajos_ordenados.groupby("city")["city"].nunique()
-    print(ciudades)
+    ciudades = len(trabajos_ordenados.groupby("city")["city"])
+    if ciudades > top:
+        ciudades = top
+    empresas = len(trabajos_ordenados.groupby("company_name")["company_name"])
+    ofertas = len(trabajos_ordenados)
+    cantitad_ciudades = trabajos_ordenados.groupby("city").count().sort_values(ascending=False)
+    mayor_ciudad = cantitad_ciudades.iloc[0]
+    menor_ciudad = cantitad_ciudades.iloc[top]
+    listado_ciudades = []
+    for item in ciudades:
+        new_city = nueva_ciudad(item, data_habilidades)
+        listado_ciudades.append(new_city)
+    return ciudades, empresas, ofertas, data_trabajos["average_maximum_salary"], cantitad_ciudades, mayor_ciudad, menor_ciudad, listado_ciudades
 
 
 def req_7(data_structs):

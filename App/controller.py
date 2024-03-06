@@ -175,8 +175,8 @@ def req_6(control, top, habilidad, fecha_inicial, fecha_final, pais):
     Retorna el resultado del requerimiento 6
     """
     # TODO: Modificar el requerimiento 6
-    req6 = model.req_6(control["model"], top, habilidad, fecha_inicial, fecha_final, pais)
-    pass
+    ciudades, empresas, ofertas, salario, mayor_ciudad, menor_ciudad, listado = model.req_6(control["model"], top, habilidad, fecha_inicial, fecha_final, pais)
+    return ciudades, empresas, ofertas, salario, mayor_ciudad, menor_ciudad, listado
 
 
 def req_7(control):

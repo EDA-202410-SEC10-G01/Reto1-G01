@@ -128,7 +128,7 @@ def print_req_3(control):
     else:
         print("Se encontraron ", numero_ofertas," empleos, de los cuales",junior,"son junior,", mid, "son mid, y", senior,"son senior:")
         for item in ofertas:
-            print(item["fecha"], item["empleo"], item["habilidad"], item["ciudad"], item["pais"], item["tamaño"], item["tipo_lugar"], item["ucranianos"])
+            print(item)
 
     
 
@@ -200,9 +200,16 @@ def print_req_6(control):
     dia_final = str(input("Dia: "))
     fecha_final = anio_final+"-"+mes_final+"-"+dia_final
     pais = str(input("Dame el pais que necesitas: "))
-    req6 = controller.req_6(control, top, habilidad, fecha_inicial, fecha_final, pais)
-    pass
-
+    ciudades, empresas, ofertas, salario, mayor_ciudad, menor_ciudad, listado = controller.req_6(control, top, habilidad, fecha_inicial, fecha_final, pais)
+    print("Se encontraron", ciudades, "ciudades que cumplen con los requerimientos.")
+    print("Se encontraron", empresas, "empresas que cumplen con los requerimientos.")
+    print("Se encontraron", ofertas, "ofertas que cumplen con los requerimientos.")
+    print("El salario promedio es de:", salario)
+    print("La ciudad con mayor numero de ofertas tiene:", mayor_ciudad, "ofertas")
+    print("La ciudad con mayor numero de ofertas tiene:", menor_ciudad, "ofertas")
+    print("Se encontraron las siguientes ciudades: ")
+    for i in listado:
+        print(i)
 
 def print_req_7(control):
     """
