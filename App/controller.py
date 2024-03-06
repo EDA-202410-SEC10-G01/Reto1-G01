@@ -149,7 +149,7 @@ def req_3(nombre_empresa, fecha_inicial, fehca_final, control):
     return ofertas, numero_ofertas, junior, mid, senior
 
 
-def req_4(control):
+def req_4(control, country_code, fecha_inicial, fecha_final):
     """
     Retorna el resultado del requerimiento 4
     """

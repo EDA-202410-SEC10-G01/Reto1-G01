@@ -27,7 +27,7 @@
 
 import config as cf
 import pandas as pd
-from datetime import datetime
+from datetime import datetime as dt
 from DISClib.ADT import list as lt
 from DISClib.ADT import stack as st
 from DISClib.ADT import queue as qu
@@ -232,12 +232,12 @@ def req_4(data_structs, country_code, fecha_inicial, fecha_final):
     """
     # TODO: Realizar el requerimiento 4
     oferta=[]
-    fecha_inicial=datetime.strptime(fecha_inicial, "%Y-%m-%dT%H:%M:%S.%fZ")
-    fecha_final=datetime.strptime(fecha_final, "%Y-%m-%dT%H:%M:%S.%fZ")
+    fecha_inicial=dt.strptime(fecha_inicial, "%Y-%m-%dT%H:%M:%S.%fZ")
+    fecha_final=dt.strptime(fecha_final, "%Y-%m-%dT%H:%M:%S.%fZ")
     for item in data_structs["jobs"]["elements"]:
         if country_code in item["country_code"]:
             a=item["published_at"]
-            a=datetime.strptime(a, "%Y-%m-%dT%H:%M:%S.%fZ")
+            a=dt.strptime(a, "%Y-%m-%dT%H:%M:%S.%fZ")
             if a>fecha_inicial and a<fecha_final:
                 oferta.append(item)
     ciudades={}
@@ -290,7 +290,7 @@ def req_5(data_structs, ciudad, fecha_inicial, fecha_final):
     return return_lista, len(lista_temporal)
 
 
-def req_6(data_structs, top, habilidad, fecha_inicial, fecha_final):
+def req_6(data_structs, top, habilidad, fecha_inicial, fecha_final, pais):
     """
     Función que soluciona el requerimiento 6
     """
@@ -310,7 +310,7 @@ def req_6(data_structs, top, habilidad, fecha_inicial, fecha_final):
         trabajos_ordenados = data_trabajos[(data_trabajos["experience_level"] == habilidad) & (data_trabajos["published_at"] >= fecha_inicial) & (data_trabajos["published_at"] <= fecha_final) & (data_trabajos["country_code"] == pais)]
     else:
         trabajos_ordenados = data_trabajos[(data_trabajos["experience_level"] == habilidad) & (data_trabajos["published_at"] >= fecha_inicial) & (data_trabajos["published_at"] <= fecha_final)]
-    ciudades = trabajos_ordenados.groupby("city")["city"].count()
+    ciudades = trabajos_ordenados.groupby("city")["city"].nunique()
     print(ciudades)
 
 
