@@ -32,9 +32,9 @@ This repository is part of the data structure and algorithms (#EDA) teaching fra
 
 The students edit this section to add their names, Uniandes emails, and specify which project functionality of the project they will implement.
 
-1. Juan Eduardo Briceño Toro, je.briceno2@uniandes.edu.co
-2. Mateo Zambrano, m.zambranob@uniandes.edu.co
-3. Nicolas Mario Romero Colmenares, nm.romeroc1@uniandes.edu.co
+1. Juan Eduardo Briceño Toro, je.briceno2@uniandes.edu.co Req 4
+2. Mateo Zambrano, m.zambranob@uniandes.edu.co Req 5
+3. Nicolas Mario Romero Colmenares, nm.romeroc1@uniandes.edu.co Req 3
 
 [Back to top](#challenge-template)
 
