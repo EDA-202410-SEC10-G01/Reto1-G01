@@ -139,7 +139,9 @@ def print_req_4(control):
     """
     country_code=str(input("Introduzca el codigo de pais que quiere buscar"))
     fecha_inicial=str(input("introduzca la fecha inicial por faovr introducirla en formato %Y-%m-%d"))
+    fecha_inicial+="T00:00:00.0Z"
     fecha_final=str(input("Ahora la fecha final"))
+    fecha_final+= "T00:00:00.0Z"
     resultado=controller.req_4(control, country_code, fecha_inicial, fecha_final)
     # TODO: Imprimir el resultado del requerimiento 4
     pass
