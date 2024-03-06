@@ -160,12 +160,12 @@ def req_5(control, ciudad, fecha_inicial, fecha_final):
     model_returner = model.req_5(control["model"], ciudad, fecha_inicial, fecha_final)
     return model_returner
 
-def req_6(control, top, habilidad, fecha_inicial, fecha_final):
+def req_6(control, top, habilidad, fecha_inicial, fecha_final, pais):
     """
     Retorna el resultado del requerimiento 6
     """
     # TODO: Modificar el requerimiento 6
-    req6 = model.req_6(control["model"], top, habilidad, fecha_inicial, fecha_final)
+    req6 = model.req_6(control["model"], top, habilidad, fecha_inicial, fecha_final, pais)
     pass
 
 
