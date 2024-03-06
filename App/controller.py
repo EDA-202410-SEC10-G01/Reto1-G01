@@ -84,14 +84,6 @@ def loademployments(catalog):
         model.addemployments(catalog, employments)
     return model.employmentssize(catalog)
 
-def loadjobs(catalog):
-    jobsfile = cf.data_dir + "small-jobs.csv"
-    input_file = csv.DictReader(open(jobsfile, encoding="utf-8"), delimiter=";")
-    for job in input_file:
-        model.addjob(catalog, job)
-    return model.jobssize(catalog)
-    
-
 
 # Funciones de ordenamiento
 
@@ -121,12 +113,13 @@ def req_1(Number, country_code, level, control):
     return Ofertas
 
 
-def req_2(control):
+def req_2(control, ciudad_oferta, nombre_empresa, n_ofertas):
     """
     Retorna el resultado del requerimiento 2
     """
     # TODO: Modificar el requerimiento 2
-    pass
+    Ofertas = model.req_1(control["model"], ciudad_oferta, nombre_empresa, n_ofertas)
+    return Ofertas
 
 
 def req_3(nombre_empresa, fecha_inicial, fehca_final, control):
@@ -157,18 +150,15 @@ def req_4(control, country_code, fecha_inicial, fecha_final):
     ofertas,size, ciudades, num_ciudades, num_empresas, mayor, menor=model.req_4(control["model"], country_code, fecha_inicial, fecha_final)
 
     return ofertas,size, ciudades, num_ciudades, num_empresas, mayor, menor
-        
-    
-    return ofertas
-    pass
 
 
-def req_5(control):
+def req_5(control, ciudad, fecha_inicial, fecha_final):
     """
     Retorna el resultado del requerimiento 5
     """
     # TODO: Modificar el requerimiento 5
-    pass
+    model_returner = model.req_5(control["model"], ciudad, fecha_inicial, fecha_final)
+    return model_returner
 
 def req_6(control, top, habilidad, fecha_inicial, fecha_final, pais):
     """
