@@ -231,8 +231,16 @@ def req_4(data_structs, country_code, fecha_inicial, fecha_final):
     Función que soluciona el requerimiento 4
     """
     # TODO: Realizar el requerimiento 4
+    oferta=lt.newList("ARRAY_LIST")
     fecha_inicial=dt.strptime(fecha_inicial, "%Y-%m-%d")
-    pass
+    fecha_final=dt.strptime(fecha_final, "%Y-%m-%d")
+    for item in data_structs["jobs"]["elements"]:
+        if country_code in item:
+            a=item["published_at"]
+            a=dt.strptime(a, "%Y-%m-%d")
+            if a>fecha_inicial and a<fecha_final:
+                lt.addLast(oferta, item)
+            
 
 
 def req_5(data_structs, ciudad, fecha_inicial, fecha_final):
